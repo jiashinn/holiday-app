@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Loader from "./Loader";
 import { getCountriesHolidays } from "../utils";
+import useComponentVisible from "../useComponentVisible";
 
 const StyledContainer = styled.div`
   position: absolute;
@@ -43,6 +44,8 @@ const StyledLi = styled.li`
 const RankingChart = () => {
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { ref, isComponentVisible, setIsComponentVisible } =
+    useComponentVisible(true);
 
   useEffect(() => {
     setLoading(true);
@@ -57,31 +60,37 @@ const RankingChart = () => {
   }, []);
 
   return (
-    <StyledContainer>
-      <StyledTitle>Country Rankings</StyledTitle>
-      <StyledText>
-        <p>All rankings are based on 2023 holidays.</p>
-        <p>Observance, religious, local and national holidays are included.</p>
-      </StyledText>
+    <div ref={ref}>
+      {isComponentVisible && (
+        <StyledContainer>
+          <StyledTitle>Country Rankings</StyledTitle>
+          <StyledText>
+            <p>All rankings are based on 2023 holidays.</p>
+            <p>
+              Observance, religious, local and national holidays are included.
+            </p>
+          </StyledText>
 
-      {loading ? (
-        <Loader />
-      ) : (
-        <StyledUl>
-          {countries &&
-            countries
-              .sort((a, b) => b.total_holidays - a.total_holidays)
-              .map((country) => {
-                return (
-                  <StyledLi key={country.uuid}>
-                    <p> {country.country_name}</p>
-                    <p>{country.total_holidays} days</p>
-                  </StyledLi>
-                );
-              })}
-        </StyledUl>
+          {loading ? (
+            <Loader />
+          ) : (
+            <StyledUl>
+              {countries &&
+                countries
+                  .sort((a, b) => b.total_holidays - a.total_holidays)
+                  .map((country) => {
+                    return (
+                      <StyledLi key={country.uuid}>
+                        <p> {country.country_name}</p>
+                        <p>{country.total_holidays} days</p>
+                      </StyledLi>
+                    );
+                  })}
+            </StyledUl>
+          )}
+        </StyledContainer>
       )}
-    </StyledContainer>
+    </div>
   );
 };
 

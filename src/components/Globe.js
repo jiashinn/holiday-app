@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactGlobe, { defaultDotMarkerOptions } from "react-globe";
 import styled from "styled-components";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/animations/scale.css";
+import Loader from "./Loader";
 
 const StyledContainer = styled.div`
   animation: fadeIn ease 5s;
@@ -74,27 +75,15 @@ const Globe = ({ focus, markers, onClickMarker, onDefocus }) => {
 
   let loader = (isLoadingGlobeBackgroundTexture ||
     isLoadingGlobeCloudsTexture ||
-    isLoadingGlobeTexture) && (
-    <div
-      style={{
-        alignItems: "center",
-        background: "black",
-        bottom: 0,
-        color: "#f5fefd",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        left: 0,
-        position: "absolute",
-        right: 0,
-        top: 0,
-        fontSize: 80,
-        fontFamily: "inherit",
-      }}
-    >
-      <p>The Holiday Explorer</p>
-    </div>
-  );
+    isLoadingGlobeTexture) && <Loader />;
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoadingGlobeBackgroundTexture(true);
+      setIsLoadingGlobeCloudsTexture(true);
+      setIsLoadingGlobeTexture(true);
+    }, 2000);
+  }, []);
 
   return (
     <>
