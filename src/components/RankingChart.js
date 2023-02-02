@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Loader from "./Loader";
 import { getCountriesHolidays } from "../utils";
 import useComponentVisible from "../useComponentVisible";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const StyledContainer = styled.div`
   position: absolute;
@@ -17,6 +19,17 @@ const StyledContainer = styled.div`
   border-radius: 10px;
   padding: 2em;
   opacity: 0.95;
+`;
+
+const StyledCloseIcon = styled(FontAwesomeIcon)`
+  font-size: 1.5rem;
+  color: #fff;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  :hover {
+    color: #636363;
+  }
 `;
 
 const StyledTitle = styled.h3`
@@ -63,30 +76,38 @@ const RankingChart = () => {
     <div ref={ref}>
       {isComponentVisible && (
         <StyledContainer>
-          <StyledTitle>Country Rankings</StyledTitle>
-          <StyledText>
-            <p>All rankings are based on 2023 holidays.</p>
-            <p>
-              Observance, religious, local and national holidays are included.
-            </p>
-          </StyledText>
-
           {loading ? (
             <Loader />
           ) : (
-            <StyledUl>
-              {countries &&
-                countries
-                  .sort((a, b) => b.total_holidays - a.total_holidays)
-                  .map((country) => {
-                    return (
-                      <StyledLi key={country.uuid}>
-                        <p> {country.country_name}</p>
-                        <p>{country.total_holidays} days</p>
-                      </StyledLi>
-                    );
-                  })}
-            </StyledUl>
+            <>
+              <StyledCloseIcon
+                icon={faXmark}
+                onClick={() => {
+                  setIsComponentVisible(false);
+                }}
+              />
+              <StyledTitle>Country Rankings</StyledTitle>
+              <StyledText>
+                <p>All rankings are based on 2023 holidays.</p>
+                <p>
+                  Observance, religious, local and national holidays are
+                  included.
+                </p>
+              </StyledText>
+              <StyledUl>
+                {countries &&
+                  countries
+                    .sort((a, b) => b.total_holidays - a.total_holidays)
+                    .map((country) => {
+                      return (
+                        <StyledLi key={country.uuid}>
+                          <p> {country.country_name}</p>
+                          <p>{country.total_holidays} days</p>
+                        </StyledLi>
+                      );
+                    })}
+              </StyledUl>
+            </>
           )}
         </StyledContainer>
       )}

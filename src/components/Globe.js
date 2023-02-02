@@ -3,16 +3,19 @@ import ReactGlobe, { defaultDotMarkerOptions } from "react-globe";
 import styled from "styled-components";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/animations/scale.css";
-import Loader from "./Loader";
+import Opening from "./Opening";
 
 const StyledContainer = styled.div`
-  animation: fadeIn ease 5s;
+  ${(p) =>
+    p.animation
+      ? ""
+      : `
+      animation: fadeIn ease 5s;
   -webkit-animation: fadeIn ease 5s;
   -moz-animation: fadeIn ease 5s;
   -o-animation: fadeIn ease 5s;
   -ms-animation: fadeIn ease 5s;
 
-  animation: fadeIn ease 5s;
   @keyframes fadeIn {
     0% {
       opacity: 0;
@@ -57,6 +60,7 @@ const StyledContainer = styled.div`
       opacity: 1;
     }
   }
+   `}
 `;
 
 const Globe = ({ focus, markers, onClickMarker, onDefocus }) => {
@@ -75,21 +79,37 @@ const Globe = ({ focus, markers, onClickMarker, onDefocus }) => {
 
   let loader = (isLoadingGlobeBackgroundTexture ||
     isLoadingGlobeCloudsTexture ||
-    isLoadingGlobeTexture) && <Loader />;
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoadingGlobeBackgroundTexture(true);
-      setIsLoadingGlobeCloudsTexture(true);
-      setIsLoadingGlobeTexture(true);
-    }, 2000);
-  }, []);
+    isLoadingGlobeTexture) && (
+    // <div
+    //   style={{
+    //     alignItems: "center",
+    //     background: "black",
+    //     bottom: 0,
+    //     color: "white",
+    //     display: "flex",
+    //     flexDirection: "column",
+    //     justifyContent: "center",
+    //     left: 0,
+    //     position: "absolute",
+    //     right: 0,
+    //     top: 0,
+    //   }}
+    // >
+    //   Loading
+    // </div>
+    <Opening />
+  );
 
   return (
     <>
       {loader}
-
-      <StyledContainer>
+      <StyledContainer
+        animation={
+          isLoadingGlobeBackgroundTexture &&
+          isLoadingGlobeCloudsTexture &&
+          isLoadingGlobeTexture
+        }
+      >
         <ReactGlobe
           initialCameraDistanceRadiusScale={3}
           height="100vh"
@@ -103,14 +123,17 @@ const Globe = ({ focus, markers, onClickMarker, onDefocus }) => {
           onGlobeCloudsTextureLoaded={() =>
             setIsLoadingGlobeCloudsTexture(false)
           }
-          onGlobeTextureLoaded={() => setIsLoadingGlobeTexture(false)}
+          onGlobeTextureLoaded={() => {
+            setTimeout(() => {
+              setIsLoadingGlobeTexture(false);
+            }, 2000);
+          }}
           markers={markers}
           options={{
             focusAnimationDuration: 1000,
             // focusDistanceRadiusScale: 2,
             // focusEasingFunction: ["Elastic", "In"],
             cameraRotateSpeed: 0.5,
-            enableMarkerGlow: true,
             markerRadiusScaleRange: [0.005, 0.02],
             markerType: "dot",
             markerTooltipRenderer: (marker) =>

@@ -51,7 +51,12 @@ function App() {
     setDetails(null);
   };
 
+  const handleClose = () => {
+    setDetails(null);
+  };
+
   useEffect(() => {
+    setLoading(true);
     getCountriesHolidays()
       .then((res) => {
         res.forEach((obj) => {
@@ -64,6 +69,11 @@ function App() {
       })
       .catch((err) => {
         console.log(err.message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
       });
   }, []);
 
@@ -85,7 +95,7 @@ function App() {
       .finally(() => {
         setTimeout(() => {
           setLoading(false);
-        }, 500);
+        }, 800);
       });
   }, [country]);
 
@@ -108,6 +118,7 @@ function App() {
           holidays={details}
           country={details[0].country.name}
           loading={loading}
+          onClose={handleClose}
         />
       )}
     </>

@@ -61,6 +61,7 @@ const Header = ({ onSearch, onDisplayRank, error }) => {
             onKeyDown={(event) => {
               if (event.key === "Enter") {
                 onSearch && onSearch(country);
+                setCountry("");
               }
             }}
           />
@@ -70,7 +71,7 @@ const Header = ({ onSearch, onDisplayRank, error }) => {
       ) : (
         <StyledWrapper>
           Holiday Explorer{" "}
-          <p>Click on a marker to see the country total holidays</p>
+          <p>Click on a dot to see the country total holidays.</p>
         </StyledWrapper>
       )}
 

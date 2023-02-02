@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import Loader from "./Loader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+
 const StyledContainer = styled.div`
   position: absolute;
   top: 0;
@@ -14,13 +17,23 @@ const StyledContainer = styled.div`
   opacity: 0.95;
   z-index: 100;
 
-  @media screen (max-width: 1024px) {
+  @media (max-width: 1024px) {
     left: 0;
     right: 0;
     margin: auto;
   }
 `;
 
+const StyledCloseIcon = styled(FontAwesomeIcon)`
+  font-size: 1.5rem;
+  color: #fff;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  :hover {
+    color: #636363;
+  }
+`;
 const StyledTitle = styled.h3`
   color: #a8516e;
 `;
@@ -43,13 +56,15 @@ const StyledLi = styled.li`
   background-color: #1b2025;
 `;
 
-const Details = ({ country, holidays, loading }) => {
+const Details = ({ country, holidays, loading, onClose }) => {
   return (
     <StyledContainer>
       {loading ? (
         <Loader />
       ) : (
         <>
+          {" "}
+          <StyledCloseIcon icon={faXmark} onClick={onClose} />
           <StyledTitle>{country} Holidays</StyledTitle>
           <StyledText>
             <p>All data are based on 2023 holidays.</p>
