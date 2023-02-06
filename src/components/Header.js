@@ -71,7 +71,7 @@ const Header = ({ onSearch, onDisplayRank, error }) => {
       ) : (
         <StyledWrapper>
           Holiday Explorer{" "}
-          <p>Click on a dot to see the country total holidays.</p>
+          <p>Click on a dot to see the country holidays data.</p>
         </StyledWrapper>
       )}
 

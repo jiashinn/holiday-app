@@ -14,7 +14,7 @@ const StyledContainer = styled.div`
 `;
 
 const StyledSVG = styled.svg`
-  font-family: inherit;
+  font-family: "Oswald", sans-serif;
   font-size: 10.5rem;
   width: min(750px, 90%);
   margin: 0 auto;
