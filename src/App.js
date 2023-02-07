@@ -82,13 +82,12 @@ function App() {
     getHolidays(country)
       .then((res) => {
         const unique = [];
-        res.map((x) =>
+        res?.map((x) =>
           unique.filter((a) => a.name === x.name && a.date.iso === a.date.iso)
             .length > 0
             ? null
             : unique.push(x)
         );
-
         setDetails(unique);
       })
       .catch((err) => console.log(err))

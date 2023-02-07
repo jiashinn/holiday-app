@@ -17,16 +17,19 @@ const StyledSVG = styled.svg`
   font-family: "Oswald", sans-serif;
   font-size: 10.5rem;
   width: min(750px, 90%);
+  height: 30;
   margin: 0 auto;
+  shape-rendering: optimizeSpeed;
+  text-rendering: optimizeSpeed;
 `;
 
 const StyledUse = styled.div`
   fill: none;
   stroke: white;
-  stroke-dasharray: 6% 29%;
+  stroke-dasharray: 6% 19%;
   stroke-width: 5px;
   stroke-dashoffset: 0%;
-  animation: stroke-offset 5.5s infinite linear;
+  animation: stroke-offset 2.5s infinite linear;
 
   :nth-child(1) {
     stroke: #f2d388; //#4d163d
@@ -73,33 +76,31 @@ const Opening = () => {
           </text>
         </symbol>
 
-        <g className="g-ants">
-          <StyledUse
-            as="use"
-            xlinkHref="#s-text"
-            className="text-copy"
-          ></StyledUse>
-          <StyledUse
-            as="use"
-            xlinkHref="#s-text"
-            className="text-copy"
-          ></StyledUse>
-          <StyledUse
-            as="use"
-            xlinkHref="#s-text"
-            className="text-copy"
-          ></StyledUse>
-          <StyledUse
-            as="use"
-            xlinkHref="#s-text"
-            className="text-copy"
-          ></StyledUse>
-          <StyledUse
-            as="use"
-            xlinkHref="#s-text"
-            className="text-copy"
-          ></StyledUse>
-        </g>
+        <StyledUse
+          as="use"
+          xlinkHref="#s-text"
+          className="text-copy"
+        ></StyledUse>
+        <StyledUse
+          as="use"
+          xlinkHref="#s-text"
+          className="text-copy"
+        ></StyledUse>
+        <StyledUse
+          as="use"
+          xlinkHref="#s-text"
+          className="text-copy"
+        ></StyledUse>
+        <StyledUse
+          as="use"
+          xlinkHref="#s-text"
+          className="text-copy"
+        ></StyledUse>
+        <StyledUse
+          as="use"
+          xlinkHref="#s-text"
+          className="text-copy"
+        ></StyledUse>
       </StyledSVG>
       <StyledSVG viewBox="0 0 960 300">
         <symbol id="l-text">
@@ -111,33 +112,31 @@ const Opening = () => {
           </text>
         </symbol>
 
-        <g className="g-ants">
-          <StyledUse
-            as="use"
-            xlinkHref="#l-text"
-            className="text-copy"
-          ></StyledUse>
-          <StyledUse
-            as="use"
-            xlinkHref="#l-text"
-            className="text-copy"
-          ></StyledUse>
-          <StyledUse
-            as="use"
-            xlinkHref="#l-text"
-            className="text-copy"
-          ></StyledUse>
-          <StyledUse
-            as="use"
-            xlinkHref="#l-text"
-            className="text-copy"
-          ></StyledUse>
-          <StyledUse
-            as="use"
-            xlinkHref="#l-text"
-            className="text-copy"
-          ></StyledUse>
-        </g>
+        <StyledUse
+          as="use"
+          xlinkHref="#l-text"
+          className="text-copy"
+        ></StyledUse>
+        <StyledUse
+          as="use"
+          xlinkHref="#l-text"
+          className="text-copy"
+        ></StyledUse>
+        <StyledUse
+          as="use"
+          xlinkHref="#l-text"
+          className="text-copy"
+        ></StyledUse>
+        <StyledUse
+          as="use"
+          xlinkHref="#l-text"
+          className="text-copy"
+        ></StyledUse>
+        <StyledUse
+          as="use"
+          xlinkHref="#l-text"
+          className="text-copy"
+        ></StyledUse>
       </StyledSVG>
     </StyledContainer>
   );

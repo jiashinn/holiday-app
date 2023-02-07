@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_key = "67231f3ffd94045ac0092796e2465dc65dd7f575";
+const API_key = "48aa43d87cd5f713a122b7ef255154c73f145406";
+//old api key
+// "67231f3ffd94045ac0092796e2465dc65dd7f575";
 
 //the list of countries owing how many days of holidays
 export const getCountriesHolidays = async () => {
